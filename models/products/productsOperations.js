@@ -1,19 +1,18 @@
 const { Products } = require("./productsSchema");
 
-const getProducts = async (req, res) => {
-  const { id: shop } = req;
-//   const { page = 1, limit = 5, favorite } = req.query;
-//   const skip = (page - 1) * limit;
-// const user = {owner}
-//   if (favorite !== undefined) {
-//   user.favorite = favorite
-// }
-  const list = await Products.find({shop}, "-createdAt -updatedAt");
+const getProducts = async (id) => {
+  const list = await Products.find({ shop: id }, "-createdAt -updatedAt");
   return list;
 };
 
+const addProduct = async (req, res) => {
+    const product = await Products.create({...req.body});
+  return product;
+
+}
+
 module.exports = {
-  getProducts
-//   registerUsresSchema,
+  getProducts,
+  addProduct
 };
 

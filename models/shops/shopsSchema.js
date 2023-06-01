@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-// const Joi = require("joi");
+const Joi = require("joi");
 
 const { Schema, model } = mongoose;
 
@@ -21,6 +21,12 @@ shopsSchema.post("save", (error, data, next) => {
 
 const ShopsList = model("ShopsList", shopsSchema);
 
+const addShopsValidation = Joi.object({
+  shopName: Joi.string().required(),
+  address: Joi.string().required(),
+});
+
 module.exports = {
   ShopsList,
+  addShopsValidation
 };
