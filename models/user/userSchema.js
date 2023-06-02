@@ -20,7 +20,7 @@ const userSchema = new Schema({
   },
   address: {
       type: String,
-    required: [true, "Set phone"],
+    required: [true, "Set address"],
   },
 });
 

@@ -12,6 +12,9 @@ const shopsSchema = new Schema({
   address: {
     type: String,
   },
+  logo: {
+    type: String,
+  }
 });
 
 shopsSchema.post("save", (error, data, next) => {
@@ -24,6 +27,7 @@ const ShopsList = model("ShopsList", shopsSchema);
 const addShopsValidation = Joi.object({
   shopName: Joi.string().required(),
   address: Joi.string().required(),
+  logo: Joi.string().required()
 });
 
 module.exports = {

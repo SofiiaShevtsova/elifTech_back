@@ -9,27 +9,32 @@ const orderSchema = new Schema({
       dishName: {
         type: String,
         required: [true, "Set name for dish"],
-        unique: true,
       },
       image: {
         type: String,
+        required: true,
       },
       price: {
         type: String,
+        required: true,
       },
-      quantity: {
+      number: {
         type: Number,
+        required: true,
       },
       shop: {
         type: String,
+        required: true,
       },
     },
   ],
   totalPrice: {
     type: String,
+    required: true,
   },
-  dataOrder: {
+  dateOrder: {
     type: String,
+    required: true,
   },
   owner: {
     type: Schema.Types.ObjectId,
