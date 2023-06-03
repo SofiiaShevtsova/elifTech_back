@@ -1,4 +1,4 @@
-const { Users } = require("./userSchema");
+const { Users, addUserValidation } = require("./userSchema");
 
 const getUser = async (req, res) => {
   try {
@@ -18,8 +18,13 @@ const addUser = async (req, res) => {
     if (userFind) {
       return userFind;
     }
-    const newUser = await Users.create({ ...req });
-    return newUser;
+    const { error } = addUserValidation.validate({ ...req });
+    if (error) {
+      res.status(400).json({ message: `${error}` });
+    } else {
+      const newUser = await Users.create({ ...req });
+      return newUser;
+    }
   } catch (error) {
     return error;
   }

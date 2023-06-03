@@ -18,7 +18,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/allShops", async(req, res, next) => {
+router.get("/allShops", async (req, res, next) => {
   try {
     const listOfShops = await getAllShops();
     res.json(listOfShops);

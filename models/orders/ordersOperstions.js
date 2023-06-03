@@ -1,4 +1,4 @@
-const { Orders } = require("./ordersSchema");
+const { Orders, addOrderValidation } = require("./ordersSchema");
 const { getUser, addUser } = require("../user/userOperstions");
 
 const getAllOrders = async (req, res) => {
@@ -20,8 +20,21 @@ const addNewOrder = async (req, res) => {
   try {
     const { email, name, phone, address, order, totalPrice, dateOrder } = req;
     const owner = await addUser({ email, name, phone, address });
-    const list = await Orders.create({ owner, order, totalPrice, dateOrder });
-    return list;
+    if (!owner) {
+      throw new Error();
+    }
+    const { error } = addOrderValidation.validate({
+      owner,
+      order,
+      totalPrice,
+      dateOrder,
+    });
+    if (error) {
+      throw new Error({ message: `${error}` });
+    } else {
+      const list = await Orders.create({ owner, order, totalPrice, dateOrder });
+      return list;
+    }
   } catch (error) {
     return error;
   }

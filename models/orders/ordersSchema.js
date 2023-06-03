@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-// const Joi = require("joi");
+const Joi = require("joi");
 
 const { Schema, model } = mongoose;
 
@@ -50,6 +50,22 @@ orderSchema.post("save", (error, data, next) => {
 
 const Orders = model("Orders", orderSchema);
 
+const addOrderValidation = Joi.object({
+  order: Joi.array().items(
+    Joi.object({
+      dishName: Joi.string().required(),
+      image: Joi.string().required(),
+      price: Joi.string().required(),
+      number: Joi.number().required(),
+      shop: Joi.string().required(),
+    })
+  ),
+  totalPrice: Joi.string().required(),
+  dateOrder: Joi.string().required(),
+  owner: Joi.string().required(),
+});
+
 module.exports = {
   Orders,
+  addOrderValidation,
 };

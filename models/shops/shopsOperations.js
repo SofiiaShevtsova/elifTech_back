@@ -1,8 +1,12 @@
 const { ShopsList } = require("./shopsSchema");
 
 const getAllShops = async (req, res) => {
-  const list = await ShopsList.find();
-  return list;
+  try {
+    const list = await ShopsList.find();
+    return list;
+  } catch (error) {
+    return error;
+  }
 };
 
 const addShop = async (req, res) => {
