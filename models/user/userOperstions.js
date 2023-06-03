@@ -2,7 +2,7 @@ const { Users } = require("./userSchema");
 
 const getUser = async (req, res) => {
   try {
-    const userFind = await Users.findOne({ req });
+    const userFind = await Users.findOne({ ...req });
     if (userFind) {
       return userFind;
     }

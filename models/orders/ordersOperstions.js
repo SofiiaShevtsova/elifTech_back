@@ -6,6 +6,9 @@ const getAllOrders = async (req, res) => {
     const { email, phone } = req;
     const user = email ? { email } : { phone };
     const owner = await getUser(user);
+    if (!owner) {
+      throw new Error();
+    }
     const list = await Orders.find({ owner }, "-createdAt -updatedAt");
     return list;
   } catch (error) {
