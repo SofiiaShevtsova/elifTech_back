@@ -9,17 +9,17 @@ const userSchema = new Schema({
     required: [true, "Set name"],
   },
   email: {
-      type: String,
+    type: String,
     required: [true, "Set email"],
-          unique: true,
-
+    unique: true,
   },
   phone: {
-      type: String,
+    type: String,
     required: [true, "Set phone"],
+    unique: true,
   },
   address: {
-      type: String,
+    type: String,
     required: [true, "Set address"],
   },
 });
