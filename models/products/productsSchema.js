@@ -6,7 +6,6 @@ const productSchema = new Schema({
   dishName: {
     type: String,
     required: [true, "Set name for dish"],
-    unique: true,
   },
   image: {
     type: String,
