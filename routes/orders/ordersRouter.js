@@ -9,9 +9,7 @@ const router = express.Router();
 router.post("/", async (req, res, next) => {
   try {
     const addedOrder = await addNewOrder(req.body);
-    res.status(201).json({
-      addedOrder,
-    });
+    res.status(201).json(addedOrder);
   } catch (error) {
     next(error);
   }
