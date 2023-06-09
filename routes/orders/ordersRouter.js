@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post("/", async (req, res, next) => {
   try {
-    const addedOrder = addNewOrder(req.body);
+    const addedOrder = await addNewOrder(req.body);
     res.status(201).json({
       addedOrder,
     });
