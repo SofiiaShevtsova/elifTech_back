@@ -24,13 +24,12 @@ const addNewOrder = async (req, res) => {
       throw new Error();
     }
     const { error } = addOrderValidation.validate({
-      owner,
+      owner: owner._id,
       order,
       totalPrice,
       dateOrder,
     });
     if (error) {
-      console.log(error)
       throw new Error({ message: `${error}` });
     } else {
       const list = await Orders.create({ owner, order, totalPrice, dateOrder });
