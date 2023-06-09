@@ -19,12 +19,12 @@ const getAllOrders = async (req, res) => {
 const addNewOrder = async (req, res) => {
   try {
     const { email, name, phone, address, order, totalPrice, dateOrder } = req;
-    const owner = await addUser({ email, name, phone, address });
-    if (!owner) {
+    const { _id } = await addUser({ email, name, phone, address });
+    if (!_id) {
       throw new Error();
     }
     const { error } = addOrderValidation.validate({
-      owner: owner._id,
+      owner: _id,
       order,
       totalPrice,
       dateOrder,
@@ -32,7 +32,12 @@ const addNewOrder = async (req, res) => {
     if (error) {
       throw new Error({ message: `${error}` });
     } else {
-      const list = await Orders.create({ owner, order, totalPrice, dateOrder });
+      const list = await Orders.create({
+        owner: _id,
+        order,
+        totalPrice,
+        dateOrder,
+      });
       return list;
     }
   } catch (error) {

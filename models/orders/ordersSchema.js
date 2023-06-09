@@ -62,7 +62,7 @@ const addOrderValidation = Joi.object({
   ),
   totalPrice: Joi.string().required(),
   dateOrder: Joi.string().required(),
-  owner: Joi.string().required(),
+  owner: Joi.any(),
 });
 
 module.exports = {
