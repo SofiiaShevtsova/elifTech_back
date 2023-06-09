@@ -30,6 +30,7 @@ const addNewOrder = async (req, res) => {
       dateOrder,
     });
     if (error) {
+      console.log(error)
       throw new Error({ message: `${error}` });
     } else {
       const list = await Orders.create({ owner, order, totalPrice, dateOrder });
