@@ -1,9 +1,11 @@
-const mongoose = require("mongoose");
-const Joi = require("joi");
+import mongoose from "mongoose";
+import Joi from "joi";
+import express from 'express';
+import { IOrder } from "../../commons/types";
 
 const { Schema, model } = mongoose;
 
-const orderSchema = new Schema({
+const orderSchema = new Schema<IOrder>({
   order: [
     {
       dishName: {
@@ -43,14 +45,14 @@ const orderSchema = new Schema({
   },
 });
 
-orderSchema.post("save", (error, data, next) => {
+orderSchema.post("save", (error: any, data: mongoose.Document, next: express.NextFunction): void => {
   error.status = 400;
   next();
 });
 
-const Orders = model("Orders", orderSchema);
+export const Orders = model("Orders", orderSchema);
 
-const addOrderValidation = Joi.object({
+export const addOrderValidation = Joi.object({
   order: Joi.array().items(
     Joi.object({
       dishName: Joi.string().required(),
@@ -64,8 +66,3 @@ const addOrderValidation = Joi.object({
   dateOrder: Joi.string().required(),
   owner: Joi.any(),
 });
-
-module.exports = {
-  Orders,
-  addOrderValidation,
-};

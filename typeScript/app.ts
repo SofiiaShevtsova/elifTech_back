@@ -1,4 +1,5 @@
-const express = require("express");
+import { myMessage, delivery } from './commons/constants';
+import express from 'express';
 const logger = require("morgan");
 const cors = require("cors");
 
@@ -13,17 +14,17 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(delivery.public));
 
-app.use("/api/shops", shopsRouter);
-app.use("/api/products", productsRouter);
-app.use("/api/orders", ordersRouter);
+app.use(delivery.routes.shops, shopsRouter);
+app.use(delivery.routes.products, productsRouter);
+app.use(delivery.routes.orders, ordersRouter);
 
-app.use((req, res) => {
-  res.status(404).json({ message: "Not found" });
+app.use((req: express.Request, res: express.Response) => {
+  res.status(404).json({ message:  myMessage.notFound});
 });
 
-app.use((err, req, res, next) => {
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   res.status(err.status || 500).json({ message: err.message });
 });
 

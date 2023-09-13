@@ -1,4 +1,4 @@
-const express = require("express");
+import express from 'express';
 const {
   getProducts,
   addProduct,
@@ -6,7 +6,7 @@ const {
 
 const router = express.Router();
 
-router.post("/", async (req, res, next) => {
+router.post("/", async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
     const product = await addProduct(req);
     res.json(product);
@@ -15,7 +15,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/:shop_id", async (req, res, next) => {
+router.get("/:shop_id", async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
     const { shop_id } = req.params;
     const listOfProducts = await getProducts(shop_id);

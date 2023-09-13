@@ -1,10 +1,10 @@
-const express = require("express");
+import express from 'express';
 const { getAllShops, addShop } = require("../../models/shops/shopsOperations");
 const { addShopsValidation } = require("../../models/shops/shopsSchema");
 
 const router = express.Router();
 
-router.post("/", async (req, res, next) => {
+router.post("/", async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
     const { error } = addShopsValidation.validate(req.body);
     if (error) {
@@ -18,7 +18,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/allShops", async (req, res, next) => {
+router.get("/allShops", async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
     const listOfShops = await getAllShops();
     res.json(listOfShops);

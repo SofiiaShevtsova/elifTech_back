@@ -1,7 +1,8 @@
-const { Orders, addOrderValidation } = require("./ordersSchema");
+import express from 'express';
+import { Orders, addOrderValidation } from "./ordersSchema";
 const { getUser, addUser } = require("../user/userOperstions");
 
-const getAllOrders = async (req, res) => {
+const getAllOrders = async (req: express.Request, res: express.Response) => {
   try {
     const { email, phone } = req;
     const user = email ? { email } : { phone };
