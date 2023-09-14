@@ -4,7 +4,7 @@ const { getUser, addUser } = require("../user/userOperstions");
 
 const getAllOrders = async (req: express.Request, res: express.Response) => {
   try {
-    const { email, phone } = req;
+    const { email, phone }: {email: string, phone: string} = req;
     const user = email ? { email } : { phone };
     const owner = await getUser(user);
     if (!owner) {
@@ -17,7 +17,7 @@ const getAllOrders = async (req: express.Request, res: express.Response) => {
   }
 };
 
-const addNewOrder = async (req, res) => {
+const addNewOrder = async (req: express.Request, res: express.Response) => {
   try {
     const { email, name, phone, address, order, totalPrice, dateOrder } = req;
     const { _id } = await addUser({ email, name, phone, address });
@@ -31,7 +31,7 @@ const addNewOrder = async (req, res) => {
       dateOrder,
     });
     if (error) {
-      throw new Error({ message: `${error}` });
+      throw new Error(`${error}`);
     } else {
       const list = await Orders.create({
         owner: _id,
