@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import express from 'express';
 
 const { Schema, model } = mongoose;
 
@@ -26,13 +27,9 @@ const productSchema = new Schema({
   },
 });
 
-productSchema.post("save", (error, data, next) => {
+productSchema.post("save", (error: any, data: mongoose.Document, next: express.NextFunction) => {
   error.status = 400;
   next();
 });
 
-const Products = model("Products", productSchema);
-
-module.exports = {
-  Products,
-};
+export const Products = model("Products", productSchema);

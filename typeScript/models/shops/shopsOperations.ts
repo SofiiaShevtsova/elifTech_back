@@ -1,6 +1,7 @@
-const { ShopsList } = require("./shopsSchema");
+import { ShopsList } from "./shopsSchema";
+import express from 'express';
 
-const getAllShops = async (req, res) => {
+const getAllShops = async (req: express.Request, res: express.Response) => {
   try {
     const list = await ShopsList.find();
     return list;
@@ -9,7 +10,7 @@ const getAllShops = async (req, res) => {
   }
 };
 
-const addShop = async (req, res) => {
+const addShop = async (req: express.Request, res: express.Response) => {
   const newShop = await ShopsList.create(req.body);
   return newShop;
 };

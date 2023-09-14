@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const Joi = require("joi");
+import mongoose from "mongoose";
+import Joi from "joi";
+import express from 'express';
 
 const { Schema, model } = mongoose;
 
@@ -24,21 +25,16 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.post("save", (error, data, next) => {
+userSchema.post("save", (error: any, data: mongoose.Document, next: express.NextFunction) => {
   error.status = 400;
   next();
 });
 
-const Users = model("Users", userSchema);
+export const Users = model("Users", userSchema);
 
-const addUserValidation = Joi.object({
+export const addUserValidation = Joi.object({
   name: Joi.string().max(30).required(),
   email: Joi.string().email().required(),
   phone: Joi.string().required(),
   address: Joi.string().required(),
 });
-
-module.exports = {
-  Users,
-  addUserValidation,
-};

@@ -1,6 +1,7 @@
-const { Products } = require("./productsSchema");
+import express from 'express';
+import { Products } from './productsSchema';
 
-const getProducts = async (id) => {
+const getProducts = async (id: string) => {
   try {
     const list = await Products.find({ shop: id }, "-createdAt -updatedAt");
     return list;
@@ -9,7 +10,7 @@ const getProducts = async (id) => {
   }
 };
 
-const addProduct = async (req, res) => {
+const addProduct = async (req: express.Request, res: express.Response) => {
   const product = await Products.create({ ...req.body });
   return product;
 };

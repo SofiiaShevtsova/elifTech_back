@@ -1,6 +1,8 @@
-const { Users, addUserValidation } = require("./userSchema");
+import { Users, addUserValidation } from "./userSchema";
+import express from 'express';
 
-const getUser = async (req, res) => {
+
+const getUser = async (req: express.Request, res: express.Response) => {
   try {
     const userFind = await Users.findOne({ ...req });
     if (userFind) {
@@ -11,7 +13,7 @@ const getUser = async (req, res) => {
   }
 };
 
-const addUser = async (req, res) => {
+const addUser = async (req: express.Request, res: express.Response) => {
   try {
     const { email } = req;
     const userFind = await Users.findOne({ email });
