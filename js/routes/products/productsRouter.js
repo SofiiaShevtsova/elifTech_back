@@ -34,5 +34,5 @@ router.get("/:shop_id", (req, res, next) => __awaiter(void 0, void 0, void 0, fu
         next(error);
     }
 }));
-module.exports = router;
+exports.default = router;
 //# sourceMappingURL=productsRouter.js.map

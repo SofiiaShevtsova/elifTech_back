@@ -27,4 +27,4 @@ router.get("/allShops", async (req: express.Request, res: express.Response, next
   }
 });
 
-module.exports = router;
+export default router;

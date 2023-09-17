@@ -33,5 +33,5 @@ router.get("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
         next(error);
     }
 }));
-module.exports = router;
+exports.default = router;
 //# sourceMappingURL=ordersRouter.js.map

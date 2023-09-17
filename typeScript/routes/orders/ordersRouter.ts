@@ -24,4 +24,4 @@ router.get("/", async (req: express.Request, res: express.Response, next: expres
   }
 });
 
-module.exports = router;
+export default router;

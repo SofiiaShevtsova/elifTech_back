@@ -1,11 +1,11 @@
 import { myMessage, delivery } from './commons/constants';
 import express from 'express';
-const logger = require("morgan");
-const cors = require("cors");
+import cors from 'cors';
+import logger from 'morgan';
 
-const productsRouter = require("./routes/products/productsRouter");
-const shopsRouter = require("./routes/shops/shopsRouter");
-const ordersRouter = require("./routes/orders/ordersRouter");
+import productsRouter from "./routes/products/productsRouter";
+import shopsRouter from "./routes/shops/shopsRouter";
+import ordersRouter from "./routes/orders/ordersRouter";
 
 const app = express();
 
@@ -28,4 +28,4 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   res.status(err.status || 500).json({ message: err.message });
 });
 
-module.exports = app;
+export default app;
