@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const { getAllOrders, addNewOrder, } = require("../../models/orders/ordersOperstions");
+const ordersOperstions_1 = require("../../models/orders/ordersOperstions");
 const router = express_1.default.Router();
 router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const addedOrder = yield addNewOrder(req.body);
+        const addedOrder = yield (0, ordersOperstions_1.addNewOrder)(req.body);
         res.status(201).json(addedOrder);
     }
     catch (error) {
@@ -26,7 +26,7 @@ router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function*
 }));
 router.get("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const listOfOrders = yield getAllOrders(Object.assign({}, req.query));
+        const listOfOrders = yield (0, ordersOperstions_1.getAllOrders)(Object.assign({}, req.query));
         res.json(listOfOrders);
     }
     catch (error) {

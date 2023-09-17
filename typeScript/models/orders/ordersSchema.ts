@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import Joi from "joi";
-import express from 'express';
 import { IOrder } from "../../commons/types";
 
 const { Schema, model } = mongoose;

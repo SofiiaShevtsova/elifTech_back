@@ -2,7 +2,7 @@ import { Users, addUserValidation } from "./userSchema";
 import express from 'express';
 
 
-const getUser = async (req: express.Request, res: express.Response) => {
+export const getUser = async (req: {email?: string, phone?: string}, res?: express.Response) => {
   try {
     const userFind = await Users.findOne({ ...req });
     if (userFind) {
@@ -13,7 +13,7 @@ const getUser = async (req: express.Request, res: express.Response) => {
   }
 };
 
-const addUser = async (req: {email: string}, res: express.Response) => {
+export const addUser = async (req: { email: string, name: string, phone: string, address: string}, res?: express.Response) => {
   try {
     const { email }: {email: string} = req;
     const userFind = await Users.findOne({ email });
@@ -22,7 +22,7 @@ const addUser = async (req: {email: string}, res: express.Response) => {
     }
     const { error } = addUserValidation.validate({ ...req });
     if (error) {
-      res.status(400).json({ message: `${error}` });
+      res && res.status(400).json({ message: `${error}` });
     } else {
       const newUser = await Users.create({ ...req });
       return newUser;
@@ -30,9 +30,4 @@ const addUser = async (req: {email: string}, res: express.Response) => {
   } catch (error) {
     return error;
   }
-};
-
-module.exports = {
-  getUser,
-  addUser,
 };

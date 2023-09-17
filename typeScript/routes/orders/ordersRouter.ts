@@ -1,12 +1,12 @@
 import express from 'express';
-const {
+import {
   getAllOrders,
   addNewOrder,
-} = require("../../models/orders/ordersOperstions");
+} from "../../models/orders/ordersOperstions";
 
 const router = express.Router();
 
-router.post("/", async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+router.post("/", async (req: {body:{ email: string, name: string, phone: string, address: string, order: string, totalPrice: string, dateOrder: string }}, res: express.Response, next: express.NextFunction) => {
   try {
     const addedOrder = await addNewOrder(req.body);
     res.status(201).json(addedOrder);
@@ -15,7 +15,7 @@ router.post("/", async (req: express.Request, res: express.Response, next: expre
   }
 });
 
-router.get("/", async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+router.get("/", async (req: {query:{email: string, phone: string}}, res: express.Response, next: express.NextFunction) => {
   try {
     const listOfOrders = await getAllOrders({ ...req.query });
     res.json(listOfOrders);
