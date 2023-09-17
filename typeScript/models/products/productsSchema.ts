@@ -27,7 +27,7 @@ const productSchema = new Schema({
   },
 });
 
-productSchema.post("save", (error: any, data: mongoose.Document, next: express.NextFunction) => {
+productSchema.post("save", (error: any, next: express.NextFunction) => {
   error.status = 400;
   next();
 });

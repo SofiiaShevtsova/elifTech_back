@@ -13,9 +13,9 @@ const getUser = async (req: express.Request, res: express.Response) => {
   }
 };
 
-const addUser = async (req: express.Request, res: express.Response) => {
+const addUser = async (req: {email: string}, res: express.Response) => {
   try {
-    const { email } = req;
+    const { email }: {email: string} = req;
     const userFind = await Users.findOne({ email });
     if (userFind) {
       return userFind;

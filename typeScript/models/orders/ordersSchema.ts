@@ -45,7 +45,7 @@ const orderSchema = new Schema<IOrder>({
   },
 });
 
-orderSchema.post("save", (error: any, data: mongoose.Document, next: express.NextFunction): void => {
+orderSchema.pre("save", (error: any, next: any) => {
   error.status = 400;
   next();
 });

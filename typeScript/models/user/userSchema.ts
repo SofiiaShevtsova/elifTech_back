@@ -25,7 +25,7 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.post("save", (error: any, data: mongoose.Document, next: express.NextFunction) => {
+userSchema.post("save", (error: any, next: express.NextFunction) => {
   error.status = 400;
   next();
 });
