@@ -1,4 +1,4 @@
-const app = require("./app");
+const app = require("./src/app");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
@@ -9,9 +9,10 @@ mongoose.set("strictQuery", true);
 mongoose
   .connect(DB_HOST)
   .then(() => {
-    app.listen(PORT);
+      app.listen(PORT, () => {
+        console.log('yes');
+    });
   })
   .catch((er) => {
     process.exit(1);
   });
-
