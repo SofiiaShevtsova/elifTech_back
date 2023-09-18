@@ -1,6 +1,6 @@
 import express from 'express';
-const { getAllShops, addShop } = require("../../models/shops/shopsOperations");
-const { addShopsValidation } = require("../../models/shops/shopsSchema");
+import { getAllShops, addShop } from "../../models/shops/shopsOperations";
+import { addShopsValidation } from "../../models/shops/shopsSchema";
 
 const router = express.Router();
 

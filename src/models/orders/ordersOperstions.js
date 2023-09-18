@@ -31,7 +31,12 @@ exports.getAllOrders = getAllOrders;
 const addNewOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, name, phone, address, order, totalPrice, dateOrder } = req;
-        const { _id } = yield (0, userOperstions_1.addUser)({ email, name, phone, address });
+        const { _id } = (yield (0, userOperstions_1.addUser)({
+            email,
+            name,
+            phone,
+            address,
+        }));
         if (!_id) {
             throw new Error();
         }

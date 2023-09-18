@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const { getProducts, addProduct, } = require("../../models/products/productsOperations");
+const productsOperations_1 = require("../../models/products/productsOperations");
 const router = express_1.default.Router();
 router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const product = yield addProduct(req);
+        const product = yield (0, productsOperations_1.addProduct)(req);
         res.json(product);
     }
     catch (error) {
@@ -27,7 +27,7 @@ router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function*
 router.get("/:shop_id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { shop_id } = req.params;
-        const listOfProducts = yield getProducts(shop_id);
+        const listOfProducts = yield (0, productsOperations_1.getProducts)(shop_id);
         res.json(listOfProducts);
     }
     catch (error) {

@@ -13,17 +13,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const { getAllShops, addShop } = require("../../models/shops/shopsOperations");
-const { addShopsValidation } = require("../../models/shops/shopsSchema");
+const shopsOperations_1 = require("../../models/shops/shopsOperations");
+const shopsSchema_1 = require("../../models/shops/shopsSchema");
 const router = express_1.default.Router();
 router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { error } = addShopsValidation.validate(req.body);
+        const { error } = shopsSchema_1.addShopsValidation.validate(req.body);
         if (error) {
             res.status(400).json({ message: `${error}` });
         }
         else {
-            const shop = yield addShop(req);
+            const shop = yield (0, shopsOperations_1.addShop)(req);
             res.json(shop);
         }
     }
@@ -33,7 +33,7 @@ router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function*
 }));
 router.get("/allShops", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const listOfShops = yield getAllShops();
+        const listOfShops = yield (0, shopsOperations_1.getAllShops)();
         res.json(listOfShops);
     }
     catch (error) {

@@ -1,8 +1,8 @@
 import express from 'express';
-const {
+import {
   getProducts,
   addProduct,
-} = require("../../models/products/productsOperations");
+} from "../../models/products/productsOperations";
 
 const router = express.Router();
 
