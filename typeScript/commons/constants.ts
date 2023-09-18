@@ -1,15 +1,27 @@
-import { IDelivery, TMessage } from './types';
+import { IDelivery, TMessage, TConstants } from "./types";
 
 export const delivery: IDelivery = {
-    routes: {
-        shops: '/api/shops',
-        products: '/api/products',
-        orders: '/api/orders',
-    },
-    public: 'public',
-}
+  routes: {
+    shops: "/api/shops",
+    products: "/api/products",
+    orders: "/api/orders",
+  },
+  public: "public",
+};
 
 export const myMessage: TMessage = {
-notFound: 'Not Found!',
-}
+  notFound: "Not Found!",
+};
 
+export const constants: TConstants = {
+  ROUTERS: {
+    AUTH: {
+      base: "/auth",
+      register: "/sign-up",
+      login: "/sign-in",
+      current: "/authenticated-user",
+    },
+    TRIPS: "/trips",
+    BOOKINGS: "/bookings",
+  },
+};

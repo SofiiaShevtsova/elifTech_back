@@ -9,9 +9,7 @@ mongoose.set("strictQuery", true);
 mongoose
   .connect(DB_HOST)
   .then(() => {
-      app.listen(PORT, () => {
-        console.log('yes');
-    });
+      app.listen(PORT);
   })
   .catch((er) => {
     process.exit(1);
