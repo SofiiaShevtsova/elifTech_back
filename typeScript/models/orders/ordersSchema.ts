@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 import Joi from "joi";
-import { IOrder } from "../../commons/types";
+import { IOrders } from "../../types/commons";
 
 const { Schema, model } = mongoose;
 
-const orderSchema = new Schema<IOrder>({
+const orderSchema = new Schema<IOrders>({
   order: [
     {
       dishName: {
@@ -49,7 +49,7 @@ orderSchema.pre("save", (error: any, next: any) => {
   next();
 });
 
-export const Orders = model("Orders", orderSchema);
+export const Orders = model<IOrders>("Orders", orderSchema);
 
 export const addOrderValidation = Joi.object({
   order: Joi.array().items(

@@ -6,19 +6,14 @@ const router = express.Router();
 router.post(
   constants.ROUTERS.AUTH.register,
   async (
-    req: {
-      body: {
-        email: string;
-        name: string;
-        phone: string;
-      };
-    },
+    req: express.Request<{}, {}, { email: string }>,
     res: express.Response,
     next: express.NextFunction
   ) => {
     try {
-    //   const addedOrder = await addNewOrder(req.body);
-    //   res.status(201).json(addedOrder);
+      const user = req.body;
+      //   const addedOrder = await addNewOrder(req.body);
+      //   res.status(201).json(addedOrder);
     } catch (error) {
       next(error);
     }

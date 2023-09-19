@@ -1,4 +1,4 @@
-import { IDelivery, TMessage, TConstants } from "./types";
+import { IDelivery, TMessage, TConstants } from "../types/types";
 
 export const delivery: IDelivery = {
   routes: {

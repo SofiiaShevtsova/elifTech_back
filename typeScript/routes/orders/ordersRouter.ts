@@ -3,24 +3,15 @@ import {
   getAllOrders,
   addNewOrder,
 } from "../../models/orders/ordersOperstions";
+import { IOrders, TOrdersAdd } from "../../types/commons";
 
 const router = express.Router();
 
 router.post(
   "/",
   async (
-    req: {
-      body: {
-        email: string;
-        name: string;
-        phone: string;
-        address: string;
-        order: string;
-        totalPrice: string;
-        dateOrder: string;
-      };
-    },
-    res: express.Response,
+    req: express.Request<{}, {}, TOrdersAdd>,
+    res: express.Response<IOrders>,
     next: express.NextFunction
   ) => {
     try {
@@ -35,8 +26,8 @@ router.post(
 router.get(
   "/",
   async (
-    req: { query: { email: string; phone: string } },
-    res: express.Response,
+    req: express.Request<{}, {}, {}, { email?: string; phone?: string }>,
+    res: express.Response<IOrders>,
     next: express.NextFunction
   ) => {
     try {

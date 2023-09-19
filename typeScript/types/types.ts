@@ -1,4 +1,3 @@
-import { Types } from "mongoose";
 
 export interface IDelivery {
   routes: {
@@ -7,19 +6,6 @@ export interface IDelivery {
     orders: string;
   };
   public: string;
-}
-
-export interface IOrder {
-  order: {
-    dishName: string;
-    image: string;
-    price: string;
-    number: number;
-    shop: string;
-  }[];
-  totalPrice: string;
-  dateOrder: string;
-  owner: Types.ObjectId;
 }
 
 export type TConstants = {
@@ -38,3 +24,4 @@ export type TConstants = {
 export type TMessage = {
   [key: string]: string;
 };
+
