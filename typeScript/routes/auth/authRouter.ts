@@ -1,12 +1,13 @@
 import express from "express";
 import { constants } from "../../commons/constants";
+import { IUserTravelApp, IUserAdd } from "../../types/commons";
 
 const router = express.Router();
 
 router.post(
   constants.ROUTERS.AUTH.register,
   async (
-    req: express.Request<{}, {}, { email: string }>,
+    req: express.Request<{}, {}, IUserAdd>,
     res: express.Response,
     next: express.NextFunction
   ) => {

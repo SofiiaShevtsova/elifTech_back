@@ -8,7 +8,7 @@ export interface IDelivery {
   public: string;
 }
 
-export type TConstants = {
+export interface ITravelApp {
   ROUTERS: {
     AUTH: {
       base: string;

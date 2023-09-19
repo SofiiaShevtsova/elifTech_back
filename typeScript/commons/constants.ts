@@ -1,4 +1,4 @@
-import { IDelivery, TMessage, TConstants } from "../types/types";
+import { IDelivery, TMessage, ITravelApp } from "../types/commons";
 
 export const delivery: IDelivery = {
   routes: {
@@ -13,7 +13,7 @@ export const myMessage: TMessage = {
   notFound: "Not Found!",
 };
 
-export const constants: TConstants = {
+export const constants: ITravelApp = {
   ROUTERS: {
     AUTH: {
       base: "/auth",
