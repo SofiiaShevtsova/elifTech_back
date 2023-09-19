@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import Joi from "joi";
-import express from 'express';
+import express from "express";
+import { IShops } from "../../types/commons";
 
 const { Schema, model } = mongoose;
 
-const shopsSchema = new Schema({
+const shopsSchema = new Schema<IShops>({
   shopName: {
     type: String,
     required: [true, "Set name for shop"],
@@ -23,7 +24,7 @@ shopsSchema.post("save", (error: any, next: express.NextFunction) => {
   next();
 });
 
-export const ShopsList = model("ShopsList", shopsSchema);
+export const ShopsList = model<IShops>("ShopsList", shopsSchema);
 
 export const addShopsValidation = Joi.object({
   shopName: Joi.string().required(),
