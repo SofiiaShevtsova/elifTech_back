@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 import express from 'express';
+import { IProducts } from '../../types/commons';
 
 const { Schema, model } = mongoose;
 
-const productSchema = new Schema({
+const productSchema = new Schema<IProducts>({
   dishName: {
     type: String,
     required: [true, "Set name for dish"],
@@ -32,4 +33,4 @@ productSchema.post("save", (error: any, next: express.NextFunction) => {
   next();
 });
 
-export const Products = model("Products", productSchema);
+export const Products = model<IProducts>("Products", productSchema);

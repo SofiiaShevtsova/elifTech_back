@@ -1,12 +1,17 @@
-import express from 'express';
-import { Products } from './productsSchema';
+import express from "express";
+import { Products } from "./productsSchema";
+import { IProducts } from "../../types/commons";
 
-export const getProducts = async (id: string) => {
+export const getProducts = async (id: string): Promise<IProducts[]> => {
   try {
     const list = await Products.find({ shop: id }, "-createdAt -updatedAt");
-    return list;
-  } catch (error) {
-    return error;
+    if (list) {
+      return list;
+    }
+       throw new Error ()
+
+  } catch (error: any) {
+   throw new Error (error.message)
   }
 };
 

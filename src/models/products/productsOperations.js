@@ -14,10 +14,13 @@ const productsSchema_1 = require("./productsSchema");
 const getProducts = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const list = yield productsSchema_1.Products.find({ shop: id }, "-createdAt -updatedAt");
-        return list;
+        if (list) {
+            return list;
+        }
+        throw new Error();
     }
     catch (error) {
-        return error;
+        throw new Error(error.message);
     }
 });
 exports.getProducts = getProducts;
