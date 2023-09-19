@@ -24,17 +24,18 @@ export const addNewOrder = async (
 ): Promise<IOrders> => {
   try {
     const { email, name, phone, address, order, totalPrice, dateOrder } = req;
-    const { _id }: { _id: string } = (await addUser({
+    const user = await addUser({
       email,
       name,
       phone,
       address,
-    })) as { _id: string };
-    if (!_id) {
+    });
+    const idUser = user ? user._id : undefined;
+    if (!idUser) {
       throw new Error();
     }
     const { error } = addOrderValidation.validate({
-      owner: _id,
+      owner: idUser,
       order,
       totalPrice,
       dateOrder,
@@ -43,7 +44,7 @@ export const addNewOrder = async (
       throw new Error(`${error}`);
     } else {
       const list = await Orders.create({
-        owner: _id,
+        owner: idUser,
         order,
         totalPrice,
         dateOrder,

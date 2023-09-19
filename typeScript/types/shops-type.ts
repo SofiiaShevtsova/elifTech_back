@@ -1,5 +1,5 @@
 export interface IShops {
-  id?: string;
+  _id?: string;
   shopName: string;
   address: string;
   logo: string;

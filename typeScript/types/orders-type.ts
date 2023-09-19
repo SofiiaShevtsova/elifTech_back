@@ -11,6 +11,7 @@ export type TOrdersAdd = {
 };
 
 export interface IOrders {
+  _id?: string;
   order: {
     dishName: string;
     image: string;

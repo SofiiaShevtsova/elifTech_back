@@ -11,15 +11,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addUser = exports.getUser = void 0;
 const userSchema_1 = require("./userSchema");
-const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getUser = (req) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userFind = yield userSchema_1.Users.findOne(Object.assign({}, req));
-        if (userFind) {
-            return userFind;
+        if (!userFind) {
+            throw new Error("Can not find user!");
         }
+        return userFind;
     }
     catch (error) {
-        return error;
+        throw new Error(error.message);
     }
 });
 exports.getUser = getUser;
@@ -40,7 +41,7 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
     catch (error) {
-        return error;
+        throw new Error(error.message);
     }
 });
 exports.addUser = addUser;

@@ -1,21 +1,28 @@
 import { Users, addUserValidation } from "./userSchema";
-import express from 'express';
+import express from "express";
+import { IUserDelivery } from "../../types/commons";
 
-
-export const getUser = async (req: {email?: string, phone?: string}, res?: express.Response) => {
+export const getUser = async (req: {
+  email?: string;
+  phone?: string;
+}): Promise<IUserDelivery> => {
   try {
     const userFind = await Users.findOne({ ...req });
-    if (userFind) {
-      return userFind;
+    if (!userFind) {
+      throw new Error("Can not find user!");
     }
-  } catch (error) {
-    return error;
+    return userFind;
+  } catch (error: any) {
+    throw new Error(error.message);
   }
 };
 
-export const addUser = async (req: { email: string, name: string, phone: string, address: string}, res?: express.Response) => {
+export const addUser = async (
+  req: IUserDelivery,
+  res?: express.Response
+): Promise<IUserDelivery| undefined> => {
   try {
-    const { email }: {email: string} = req;
+    const { email }= req;
     const userFind = await Users.findOne({ email });
     if (userFind) {
       return userFind;
@@ -27,7 +34,7 @@ export const addUser = async (req: { email: string, name: string, phone: string,
       const newUser = await Users.create({ ...req });
       return newUser;
     }
-  } catch (error) {
-    return error;
+  } catch (error: any) {
+    throw new Error(error.message);
   }
 };

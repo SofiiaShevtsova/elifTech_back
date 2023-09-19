@@ -17,6 +17,7 @@ const constants_1 = require("../../commons/constants");
 const router = express_1.default.Router();
 router.post(constants_1.constants.ROUTERS.AUTH.register, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const user = req.body;
     }
     catch (error) {
         next(error);

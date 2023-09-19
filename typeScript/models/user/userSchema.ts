@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import Joi from "joi";
 import express from 'express';
+import { IUserDelivery } from "../../types/commons";
 
 const { Schema, model } = mongoose;
 
-const userSchema = new Schema({
+const userSchema = new Schema<IUserDelivery>({
   name: {
     type: String,
     required: [true, "Set name"],
@@ -30,7 +31,7 @@ userSchema.post("save", (error: any, next: express.NextFunction) => {
   next();
 });
 
-export const Users = model("Users", userSchema);
+export const Users = model<IUserDelivery>("Users", userSchema);
 
 export const addUserValidation = Joi.object({
   name: Joi.string().max(30).required(),

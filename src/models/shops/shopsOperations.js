@@ -17,7 +17,7 @@ const getAllShops = () => __awaiter(void 0, void 0, void 0, function* () {
         return list;
     }
     catch (error) {
-        return error;
+        throw new Error(error.message);
     }
 });
 exports.getAllShops = getAllShops;

@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addNewOrder = exports.getAllOrders = void 0;
 const ordersSchema_1 = require("./ordersSchema");
 const userOperstions_1 = require("../user/userOperstions");
-const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllOrders = (req) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, phone } = req;
         const user = email ? { email } : { phone };
@@ -24,24 +24,25 @@ const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return list;
     }
     catch (error) {
-        return error;
+        throw new Error(error.message);
     }
 });
 exports.getAllOrders = getAllOrders;
-const addNewOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const addNewOrder = (req) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, name, phone, address, order, totalPrice, dateOrder } = req;
-        const { _id } = (yield (0, userOperstions_1.addUser)({
+        const user = yield (0, userOperstions_1.addUser)({
             email,
             name,
             phone,
             address,
-        }));
-        if (!_id) {
+        });
+        const idUser = user ? user._id : undefined;
+        if (!idUser) {
             throw new Error();
         }
         const { error } = ordersSchema_1.addOrderValidation.validate({
-            owner: _id,
+            owner: idUser,
             order,
             totalPrice,
             dateOrder,
@@ -51,7 +52,7 @@ const addNewOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         }
         else {
             const list = yield ordersSchema_1.Orders.create({
-                owner: _id,
+                owner: idUser,
                 order,
                 totalPrice,
                 dateOrder,
@@ -60,7 +61,7 @@ const addNewOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         }
     }
     catch (error) {
-        return error;
+        throw new Error(error.message);
     }
 });
 exports.addNewOrder = addNewOrder;
