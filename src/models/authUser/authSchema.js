@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserTravel = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
+const commons_1 = require("../../helpers/commons");
 const { Schema, model } = mongoose_1.default;
 const userSchema = new Schema({
     fullName: {
@@ -25,9 +26,6 @@ const userSchema = new Schema({
         default: "",
     },
 });
-userSchema.post("save", (error, next) => {
-    error.status = 400;
-    next();
-});
+userSchema.post("save", commons_1.mongooseHandleError);
 exports.UserTravel = model("User", userSchema);
 //# sourceMappingURL=authSchema.js.map

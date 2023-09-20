@@ -14,18 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const shopsOperations_1 = require("../../models/shops/shopsOperations");
-const shopsSchema_1 = require("../../models/shops/shopsSchema");
+const shops_validation_1 = require("../../validation-schemas/shops-validation");
+const validation_body_1 = require("../../middlewares/validation-body");
 const router = express_1.default.Router();
-router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.post("/", (0, validation_body_1.validateBody)(shops_validation_1.addShopsValidation), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { error } = shopsSchema_1.addShopsValidation.validate(req.body);
-        if (error) {
-            res.status(400).json({ message: `${error}` });
-        }
-        else {
-            const shop = yield (0, shopsOperations_1.addShop)(req);
-            res.json(shop);
-        }
+        const shop = yield (0, shopsOperations_1.addShop)(req);
+        res.json(shop);
     }
     catch (error) {
         next(error);

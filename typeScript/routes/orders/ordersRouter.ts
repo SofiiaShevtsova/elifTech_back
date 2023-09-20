@@ -4,11 +4,13 @@ import {
   addNewOrder,
 } from "../../models/orders/ordersOperstions";
 import { IOrders, TOrdersAdd } from "../../types/commons";
+import { validateBody } from "../../middlewares/validation-body";
+import { addOrderValidation } from "../../validation-schemas/commons";
 
 const router = express.Router();
 
 router.post(
-  "/",
+  "/", validateBody(addOrderValidation),
   async (
     req: express.Request<{}, {}, TOrdersAdd>,
     res: express.Response<IOrders>,

@@ -14,8 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const constants_1 = require("../../commons/constants");
+const commons_1 = require("../../middlewares/commons");
+const commons_2 = require("../../validation-schemas/commons");
 const router = express_1.default.Router();
-router.post(constants_1.constants.ROUTERS.AUTH.register, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.post(constants_1.constants.ROUTERS.AUTH.register, (0, commons_1.validateBody)(commons_2.registerUserSchema), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = req.body;
     }

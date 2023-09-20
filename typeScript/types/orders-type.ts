@@ -5,7 +5,13 @@ export type TOrdersAdd = {
   name: string;
   phone: string;
   address: string;
-  order: string;
+  order: {
+    dishName: string;
+    image: string;
+    price: string;
+    number: number;
+    shop: string;
+  }[];
   totalPrice: string;
   dateOrder: string;
 };

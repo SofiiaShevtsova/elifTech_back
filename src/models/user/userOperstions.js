@@ -31,14 +31,8 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (userFind) {
             return userFind;
         }
-        const { error } = userSchema_1.addUserValidation.validate(Object.assign({}, req));
-        if (error) {
-            res && res.status(400).json({ message: `${error}` });
-        }
-        else {
-            const newUser = yield userSchema_1.Users.create(Object.assign({}, req));
-            return newUser;
-        }
+        const newUser = yield userSchema_1.Users.create(Object.assign({}, req));
+        return newUser;
     }
     catch (error) {
         throw new Error(error.message);

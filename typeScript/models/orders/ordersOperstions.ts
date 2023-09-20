@@ -35,15 +35,6 @@ export const addNewOrder = async (
     if (!idUser) {
       throw new Error();
     }
-    const { error } = addOrderValidation.validate({
-      owner: idUser,
-      order,
-      totalPrice,
-      dateOrder,
-    });
-    if (error) {
-      throw new Error(`${error}`);
-    } else {
       const list = await Orders.create({
         owner: idUser,
         order,
@@ -51,7 +42,6 @@ export const addNewOrder = async (
         dateOrder,
       }) as unknown as IOrders;
       return list;
-    }
   } catch (error: any) {
     throw new Error(error.message);
   }

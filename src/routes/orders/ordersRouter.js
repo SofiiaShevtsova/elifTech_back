@@ -14,8 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const ordersOperstions_1 = require("../../models/orders/ordersOperstions");
+const validation_body_1 = require("../../middlewares/validation-body");
+const commons_1 = require("../../validation-schemas/commons");
 const router = express_1.default.Router();
-router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.post("/", (0, validation_body_1.validateBody)(commons_1.addOrderValidation), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const addedOrder = yield (0, ordersOperstions_1.addNewOrder)(req.body);
         res.status(201).json(addedOrder);

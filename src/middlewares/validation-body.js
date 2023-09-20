@@ -1,7 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validationBody = void 0;
-const validationBody = () => {
+exports.validateBody = void 0;
+const validateBody = (schema) => {
+    return (req, res, next) => {
+        const { error } = schema.validate(req.body);
+        if (error) {
+        }
+        next();
+    };
 };
-exports.validationBody = validationBody;
+exports.validateBody = validateBody;
 //# sourceMappingURL=validation-body.js.map

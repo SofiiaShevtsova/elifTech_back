@@ -12,5 +12,8 @@ export const addOrderValidation = Joi.object({
   ),
   totalPrice: Joi.string().required(),
   dateOrder: Joi.string().required(),
-  owner: Joi.any(),
+  name: Joi.string().max(30).required(),
+  email: Joi.string().email().required(),
+  phone: Joi.string().required(),
+  address: Joi.string().required(),
 });

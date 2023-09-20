@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Orders = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
+const commons_1 = require("../../helpers/commons");
 const { Schema, model } = mongoose_1.default;
 const orderSchema = new Schema({
     order: [
@@ -45,9 +46,6 @@ const orderSchema = new Schema({
         required: true,
     },
 });
-orderSchema.pre("save", (error, next) => {
-    error.status = 400;
-    next();
-});
+orderSchema.post("save", commons_1.mongooseHandleError);
 exports.Orders = model("Orders", orderSchema);
 //# sourceMappingURL=ordersSchema.js.map

@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addNewOrder = exports.getAllOrders = void 0;
 const ordersSchema_1 = require("./ordersSchema");
 const userOperstions_1 = require("../user/userOperstions");
-const commons_1 = require("../../validation-schemas.ts/commons");
 const getAllOrders = (req) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, phone } = req;
@@ -42,24 +41,13 @@ const addNewOrder = (req) => __awaiter(void 0, void 0, void 0, function* () {
         if (!idUser) {
             throw new Error();
         }
-        const { error } = commons_1.addOrderValidation.validate({
+        const list = yield ordersSchema_1.Orders.create({
             owner: idUser,
             order,
             totalPrice,
             dateOrder,
         });
-        if (error) {
-            throw new Error(`${error}`);
-        }
-        else {
-            const list = yield ordersSchema_1.Orders.create({
-                owner: idUser,
-                order,
-                totalPrice,
-                dateOrder,
-            });
-            return list;
-        }
+        return list;
     }
     catch (error) {
         throw new Error(error.message);
