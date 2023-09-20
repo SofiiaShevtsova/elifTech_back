@@ -1,11 +1,13 @@
 import express from "express";
 import { constants } from "../../commons/constants";
 import { IUserTravelApp, IUserAdd } from "../../types/commons";
+import { validateBody } from "../../middlewares/commons";
+import {registerUserSchema} from '../../validation-schemas/commons'
 
 const router = express.Router();
 
 router.post(
-  constants.ROUTERS.AUTH.register,
+  constants.ROUTERS.AUTH.register, validateBody(registerUserSchema) ,
   async (
     req: express.Request<{}, {}, IUserAdd>,
     res: express.Response,

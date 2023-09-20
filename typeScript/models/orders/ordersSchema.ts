@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { IOrders } from "../../types/commons";
+import {mongooseHandleError} from '../../helpers/commons'
 
 const { Schema, model } = mongoose;
 
@@ -43,9 +44,6 @@ const orderSchema = new Schema<IOrders>({
   },
 });
 
-orderSchema.pre("save", (error: any, next: any) => {
-  error.status = 400;
-  next();
-});
+orderSchema.post("save", mongooseHandleError);
 
 export const Orders = model<IOrders>("Orders", orderSchema);

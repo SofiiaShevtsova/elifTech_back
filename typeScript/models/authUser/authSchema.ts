@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import express from 'express';
 import { IUserTravelApp } from '../../types/commons';
+import {mongooseHandleError} from '../../helpers/commons'
+
 
 const { Schema, model } = mongoose;
 
@@ -24,9 +26,6 @@ const userSchema = new Schema<IUserTravelApp>({
   },
 });
 
-userSchema.post("save", (error: any, next: express.NextFunction) => {
-  error.status = 400;
-  next();
-});
+userSchema.post("save", mongooseHandleError);
 
 export const UserTravel = model<IUserTravelApp>("User", userSchema);

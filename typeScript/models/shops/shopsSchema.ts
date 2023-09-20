@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import express from "express";
 import { IShops } from "../../types/commons";
+import {mongooseHandleError} from '../../helpers/commons'
 
 const { Schema, model } = mongoose;
 
@@ -18,9 +19,6 @@ const shopsSchema = new Schema<IShops>({
   },
 });
 
-shopsSchema.post("save", (error: any, next: express.NextFunction) => {
-  error.status = 400;
-  next();
-});
+shopsSchema.post("save", mongooseHandleError);
 
 export const ShopsList = model<IShops>("ShopsList", shopsSchema);
