@@ -1,7 +1,8 @@
-import { myMessage, delivery } from './commons/constants';
 import express from 'express';
 import cors from 'cors';
 import logger from 'morgan';
+import { myMessage, delivery } from './commons/constants';
+import { MyError } from './helpers/commons';
 
 import productsRouter from "./routes/products/productsRouter";
 import shopsRouter from "./routes/shops/shopsRouter";
@@ -24,7 +25,7 @@ app.use((req: express.Request, res: express.Response) => {
   res.status(404).json({ message:  myMessage.notFound});
 });
 
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use((err: MyError, req: express.Request, res: express.Response, next: express.NextFunction): void => {
   res.status(err.status || 500).json({ message: err.message });
 });
 
