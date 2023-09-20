@@ -12,6 +12,5 @@ export class MyError extends Error {
 
 export const catchError = (status: number, message?: string): MyError => {
   const errorMessage = message ? message : myMessage[status];
-  const error = new MyError({ message: errorMessage, status });
-  return error;
+  return new MyError({ message: errorMessage, status });
 };

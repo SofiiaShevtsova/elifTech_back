@@ -1,44 +1,16 @@
 import express from "express";
+import { ctrlWrapper } from "../../helpers/commons";
 import {
   getAllOrders,
   addNewOrder,
 } from "../../models/orders/ordersOperstions";
-import { IOrders, TOrdersAdd } from "../../types/commons";
-import { validateBody } from "../../middlewares/validation-body";
+import { validateBody } from "../../middlewares/commons";
 import { addOrderValidation } from "../../validation-schemas/commons";
 
 const router = express.Router();
 
-router.post(
-  "/", validateBody(addOrderValidation),
-  async (
-    req: express.Request<{}, {}, TOrdersAdd>,
-    res: express.Response<IOrders>,
-    next: express.NextFunction
-  ) => {
-    try {
-      const addedOrder = await addNewOrder(req.body);
-      res.status(201).json(addedOrder);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+router.post("/", validateBody(addOrderValidation), ctrlWrapper(addNewOrder));
 
-router.get(
-  "/",
-  async (
-    req: express.Request<{}, {}, {}, { email?: string; phone?: string }>,
-    res: express.Response<IOrders>,
-    next: express.NextFunction
-  ) => {
-    try {
-      const listOfOrders = await getAllOrders({ ...req.query });
-      res.json(listOfOrders);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+router.get("/", ctrlWrapper(getAllOrders));
 
 export default router;
