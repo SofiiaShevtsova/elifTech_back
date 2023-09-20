@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.authenticate = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const userSchema_1 = require("../models/user/userSchema");
+const authSchema_1 = require("../models/authUser/authSchema");
 dotenv_1.default.config();
 const { ACCESS_SECRET_KEY } = process.env;
 const authenticate = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -26,7 +26,7 @@ const authenticate = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     try {
         if (ACCESS_SECRET_KEY) {
             const payload = jsonwebtoken_1.default.verify(token, ACCESS_SECRET_KEY);
-            const user = yield userSchema_1.Users.findById(payload.id);
+            const user = yield authSchema_1.UserTravel.findById(payload.id);
             if (user) {
                 req.user = user;
             }

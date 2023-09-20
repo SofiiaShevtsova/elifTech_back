@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import express from 'express'
-import { Users } from '../models/user/userSchema';
-import { IUserAdd, JwtPayload, IUserDelivery } from '../types/commons';
+import { UserTravel } from '../models/authUser/authSchema';
+import { JwtPayload, IUserTravelApp } from '../types/commons';
 // const { User } = require("../models/auth/userSchema");
 // const HttpError = require("../helpers/HttpError");
 
@@ -11,7 +11,7 @@ dotenv.config();
 declare global {
     namespace Express {
         interface Request {
-            user: IUserDelivery;
+            user: IUserTravelApp;
         }
     }
 }
@@ -27,7 +27,7 @@ export const authenticate = async (req: express.Request, res: express.Response, 
     try {
         if (ACCESS_SECRET_KEY) {
             const payload: JwtPayload = jwt.verify(token, ACCESS_SECRET_KEY) as unknown as JwtPayload;
-            const user = await Users.findById(payload.id);
+            const user = await UserTravel.findById(payload.id);
             // if (!user || !user.token || user.token !== token) {
             // //   next(HttpError(401, "Not authorized"));
             // }
