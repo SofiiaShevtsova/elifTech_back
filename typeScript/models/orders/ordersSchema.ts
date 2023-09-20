@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import Joi from "joi";
 import { IOrders } from "../../types/commons";
 
 const { Schema, model } = mongoose;
@@ -50,18 +49,3 @@ orderSchema.pre("save", (error: any, next: any) => {
 });
 
 export const Orders = model<IOrders>("Orders", orderSchema);
-
-export const addOrderValidation = Joi.object({
-  order: Joi.array().items(
-    Joi.object({
-      dishName: Joi.string().required(),
-      image: Joi.string().required(),
-      price: Joi.string().required(),
-      number: Joi.number().required(),
-      shop: Joi.string().required(),
-    })
-  ),
-  totalPrice: Joi.string().required(),
-  dateOrder: Joi.string().required(),
-  owner: Joi.any(),
-});

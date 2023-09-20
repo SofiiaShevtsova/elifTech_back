@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addNewOrder = exports.getAllOrders = void 0;
 const ordersSchema_1 = require("./ordersSchema");
 const userOperstions_1 = require("../user/userOperstions");
+const commons_1 = require("../../validation-schemas.ts/commons");
 const getAllOrders = (req) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, phone } = req;
@@ -41,7 +42,7 @@ const addNewOrder = (req) => __awaiter(void 0, void 0, void 0, function* () {
         if (!idUser) {
             throw new Error();
         }
-        const { error } = ordersSchema_1.addOrderValidation.validate({
+        const { error } = commons_1.addOrderValidation.validate({
             owner: idUser,
             order,
             totalPrice,

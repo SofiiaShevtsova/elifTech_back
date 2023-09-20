@@ -1,1 +1,0 @@
-export {registerUserSchema, loginUserSchema} from './user-travel-validation'

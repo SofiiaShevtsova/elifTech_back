@@ -1,4 +1,5 @@
-import { Users, addUserValidation } from "./userSchema";
+import { Users } from "./userSchema";
+import {addUserDeliveryValidation} from '../../validation-schemas/commons'
 import express from "express";
 import { IUserDelivery } from "../../types/commons";
 
@@ -27,7 +28,7 @@ export const addUser = async (
     if (userFind) {
       return userFind;
     }
-    const { error } = addUserValidation.validate({ ...req });
+    const { error } = addUserDeliveryValidation.validate({ ...req });
     if (error) {
       res && res.status(400).json({ message: `${error}` });
     } else {

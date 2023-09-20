@@ -1,5 +1,6 @@
-import { Orders, addOrderValidation } from "./ordersSchema";
+import { Orders} from "./ordersSchema";
 import { getUser, addUser } from "../user/userOperstions";
+import { addOrderValidation } from "../../validation-schemas/commons";
 import { IOrders, TOrdersAdd } from "../../types/commons";
 
 export const getAllOrders = async (

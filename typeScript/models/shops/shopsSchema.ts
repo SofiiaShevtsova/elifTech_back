@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import Joi from "joi";
 import express from "express";
 import { IShops } from "../../types/commons";
 
@@ -25,9 +24,3 @@ shopsSchema.post("save", (error: any, next: express.NextFunction) => {
 });
 
 export const ShopsList = model<IShops>("ShopsList", shopsSchema);
-
-export const addShopsValidation = Joi.object({
-  shopName: Joi.string().required(),
-  address: Joi.string().required(),
-  logo: Joi.string().required(),
-});
