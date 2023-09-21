@@ -19,14 +19,14 @@ exports.myMessage = {
 exports.constants = {
     ROUTERS: {
         AUTH: {
-            base: "/auth",
+            base: "api/auth",
             register: "/sign-up",
             login: "/sign-in",
             current: "/authenticated-user",
             logout: '/log-out',
         },
-        TRIPS: "/trips",
-        BOOKINGS: "/bookings",
+        TRIPS: "api/trips",
+        BOOKINGS: "api/bookings",
     },
 };
 //# sourceMappingURL=constants.js.map
