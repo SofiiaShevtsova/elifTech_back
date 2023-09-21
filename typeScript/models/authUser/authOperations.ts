@@ -17,8 +17,11 @@ export const registerUser = async (
     }
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
-    const newUser = await UserTravel.create({ ...req, password: hashPassword });
-    res.status(201).json(newUser);
+    const user = await UserTravel.create({ ...req, password: hashPassword });
+
+    const updatedUser = createToken(user);
+    await UserTravel.findByIdAndUpdate(user._id, { token: updatedUser.token });
+    res.status(201).json(updatedUser);
   } catch (error: any) {
     throw catchError(400, error.message);
   }
@@ -39,10 +42,9 @@ export const loginUser = async (
     if (!compareResult) {
       throw catchError(401, "Email or password is wrong");
     }
-    const token = createToken(user._id);
-    user.token = token;
-    await UserTravel.findByIdAndUpdate(user._id, { token });
-    res.status(201).json(user);
+    const updatedUser = createToken(user);
+    await UserTravel.findByIdAndUpdate(user._id, { token: updatedUser.token });
+    res.status(201).json(updatedUser);
   } catch (error: any) {
     throw catchError(400, error.message);
   }
@@ -65,8 +67,8 @@ export const logoutUser = async (
   try {
     const user = req.user;
     const token = "";
-      await UserTravel.findByIdAndUpdate(user._id, { token });
-        res.status(204).json({message: "The user has logged out!"});
+    await UserTravel.findByIdAndUpdate(user._id, { token });
+    res.status(204).json({ message: "The user has logged out!" });
   } catch (error: any) {
     throw catchError(400, error.message);
   }

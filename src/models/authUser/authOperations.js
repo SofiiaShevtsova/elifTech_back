@@ -25,8 +25,10 @@ const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         }
         const salt = yield bcryptjs_1.default.genSalt(10);
         const hashPassword = yield bcryptjs_1.default.hash(password, salt);
-        const newUser = yield authSchema_1.UserTravel.create(Object.assign(Object.assign({}, req), { password: hashPassword }));
-        res.status(201).json(newUser);
+        const user = yield authSchema_1.UserTravel.create(Object.assign(Object.assign({}, req), { password: hashPassword }));
+        const updatedUser = (0, commons_1.createToken)(user);
+        yield authSchema_1.UserTravel.findByIdAndUpdate(user._id, { token: updatedUser.token });
+        res.status(201).json(updatedUser);
     }
     catch (error) {
         throw (0, commons_1.catchError)(400, error.message);
@@ -44,10 +46,9 @@ const loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         if (!compareResult) {
             throw (0, commons_1.catchError)(401, "Email or password is wrong");
         }
-        const token = (0, commons_1.createToken)(user._id);
-        user.token = token;
-        yield authSchema_1.UserTravel.findByIdAndUpdate(user._id, { token });
-        res.status(201).json(user);
+        const updatedUser = (0, commons_1.createToken)(user);
+        yield authSchema_1.UserTravel.findByIdAndUpdate(user._id, { token: updatedUser.token });
+        res.status(201).json(updatedUser);
     }
     catch (error) {
         throw (0, commons_1.catchError)(400, error.message);

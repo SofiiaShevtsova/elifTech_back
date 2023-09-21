@@ -8,13 +8,13 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 dotenv_1.default.config();
 const { ACCESS_SECRET_KEY } = process.env;
-const createToken = (id) => {
-    const payload = { id };
+const createToken = (user) => {
+    const payload = { id: user._id };
     if (ACCESS_SECRET_KEY) {
         const token = jsonwebtoken_1.default.sign(payload, ACCESS_SECRET_KEY, { expiresIn: "24h" });
-        return token;
+        user.token = token;
     }
-    return "";
+    return user;
 };
 exports.createToken = createToken;
 //# sourceMappingURL=create-token.js.map
