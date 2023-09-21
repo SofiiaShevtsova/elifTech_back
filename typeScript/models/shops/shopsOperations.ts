@@ -1,17 +1,29 @@
+import { Request, Response, NextFunction } from "express";
 import { ShopsList } from "./shopsSchema";
-import express from "express";
 import { IShops } from "../../types/commons";
 
-export const getAllShops = async (): Promise<IShops[]> => {
+export const getAllShops = async (
+  req: Request,
+  res: Response<IShops[]>,
+  next: NextFunction
+) => {
   try {
     const list = await ShopsList.find();
-    return list;
-  } catch (error: any) {
-    throw new Error(error.message);
+    res.json(list);
+  } catch (error) {
+    next(error);
   }
 };
 
-export const addShop = async (req: express.Request): Promise<IShops> => {
-  const newShop = await ShopsList.create(req.body);
-  return newShop;
+export const addShop = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const newShop = await ShopsList.create(req.body);
+    res.json(newShop);
+  } catch (error) {
+    next(error);
+  }
 };
