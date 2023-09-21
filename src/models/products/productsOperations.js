@@ -11,22 +11,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addProduct = exports.getProducts = void 0;
 const productsSchema_1 = require("./productsSchema");
-const getProducts = (id) => __awaiter(void 0, void 0, void 0, function* () {
+const getProducts = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const list = yield productsSchema_1.Products.find({ shop: id }, "-createdAt -updatedAt");
-        if (list) {
-            return list;
+        const { shop_id } = req.params;
+        const list = yield productsSchema_1.Products.find({ shop: shop_id }, "-createdAt -updatedAt");
+        if (!list) {
+            throw new Error();
         }
-        throw new Error();
+        res.json(list);
     }
     catch (error) {
-        throw new Error(error.message);
+        next(error);
     }
 });
 exports.getProducts = getProducts;
-const addProduct = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const product = yield productsSchema_1.Products.create(Object.assign({}, req.body));
-    return product;
+const addProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const product = yield productsSchema_1.Products.create(Object.assign({}, req.body));
+        res.json(product);
+    }
+    catch (error) {
+        next(error);
+    }
 });
 exports.addProduct = addProduct;
 //# sourceMappingURL=productsOperations.js.map

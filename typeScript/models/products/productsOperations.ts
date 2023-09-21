@@ -1,21 +1,36 @@
-import express from "express";
+import { Request, Response, NextFunction } from "express";
 import { Products } from "./productsSchema";
 import { IProducts } from "../../types/commons";
 
-export const getProducts = async (id: string): Promise<IProducts[]> => {
+export const getProducts = async (
+  req: Request<{ shop_id: string }>,
+  res: Response<IProducts[]>,
+  next: NextFunction
+) => {
   try {
-    const list = await Products.find({ shop: id }, "-createdAt -updatedAt");
-    if (list) {
-      return list;
+    const { shop_id } = req.params;
+    const list = await Products.find(
+      { shop: shop_id },
+      "-createdAt -updatedAt"
+    );
+    if (!list) {
+      throw new Error();
     }
-       throw new Error ()
-
-  } catch (error: any) {
-   throw new Error (error.message)
+    res.json(list);
+  } catch (error) {
+    next(error);
   }
 };
 
-export const addProduct = async (req: express.Request) => {
-  const product = await Products.create({ ...req.body });
-  return product;
+export const addProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const product = await Products.create({ ...req.body });
+    res.json(product);
+  } catch (error) {
+    next(error);
+  }
 };

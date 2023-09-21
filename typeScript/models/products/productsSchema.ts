@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import express from 'express';
 import { IProducts } from '../../types/commons';
 import {mongooseHandleError} from '../../helpers/commons'
 
