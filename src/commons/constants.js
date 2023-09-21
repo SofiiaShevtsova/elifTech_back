@@ -23,6 +23,7 @@ exports.constants = {
             register: "/sign-up",
             login: "/sign-in",
             current: "/authenticated-user",
+            logout: '/log-out',
         },
         TRIPS: "/trips",
         BOOKINGS: "/bookings",

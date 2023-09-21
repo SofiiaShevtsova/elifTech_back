@@ -1,43 +1,42 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import { constants } from "../../commons/constants";
-import { IUserTravelApp, IUserAdd } from "../../types/commons";
-import { validateBody } from "../../middlewares/commons";
-import { registerUserSchema } from '../../validation-schemas/commons'
-import {catchError} from '../../helpers/commons'
+import { authenticate, validateBody } from "../../middlewares/commons";
+import {
+  registerUserSchema,
+  loginUserSchema,
+} from "../../validation-schemas/commons";
+import { ctrlWrapper } from "../../helpers/commons";
+import {
+  getCurrentUser,
+  loginUser,
+  logoutUser,
+  registerUser,
+} from "../../models/authUser/authOperations";
 
 const router = express.Router();
 
 router.post(
-  constants.ROUTERS.AUTH.register, validateBody(registerUserSchema) ,
-  async (
-    req: Request<{}, {}, IUserAdd>,
-    res: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const user = req.body;
-      //   const addedOrder = await addNewOrder(req.body);
-      //   res.status(201).json(addedOrder);
-    } catch (error: any) {
-     throw catchError(400, error.message);
-    }
-  }
+  constants.ROUTERS.AUTH.register,
+  validateBody(registerUserSchema),
+  ctrlWrapper(registerUser)
 );
 
-// router.get(
-//   "/",
-//   async (
-//     req: { query: { email: string; phone: string } },
-//     res: express.Response,
-//     next: express.NextFunction
-//   ) => {
-//     try {
-//       const listOfOrders = await getAllOrders({ ...req.query });
-//       res.json(listOfOrders);
-//     } catch (error) {
-//       next(error);
-//     }
-//   }
-// );
+router.post(
+  constants.ROUTERS.AUTH.login,
+  validateBody(loginUserSchema),
+  ctrlWrapper(loginUser)
+);
+
+router.get(
+  constants.ROUTERS.AUTH.current,
+  authenticate,
+  ctrlWrapper(getCurrentUser)
+);
+
+router.post(
+  constants.ROUTERS.AUTH.logout,
+  authenticate,
+  ctrlWrapper(logoutUser)
+);
 
 export default router;

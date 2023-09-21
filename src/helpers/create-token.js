@@ -12,8 +12,9 @@ const createToken = (id) => {
     const payload = { id };
     if (ACCESS_SECRET_KEY) {
         const token = jsonwebtoken_1.default.sign(payload, ACCESS_SECRET_KEY, { expiresIn: "24h" });
-        return { token };
+        return token;
     }
+    return "";
 };
 exports.createToken = createToken;
 //# sourceMappingURL=create-token.js.map

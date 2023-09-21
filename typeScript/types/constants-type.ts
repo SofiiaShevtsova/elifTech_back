@@ -15,6 +15,7 @@ export interface ITravelApp {
       register: string;
       login: string;
       current: string;
+      logout: string;
     };
     TRIPS: string;
     BOOKINGS: string;

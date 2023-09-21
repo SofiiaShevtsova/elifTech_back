@@ -12,25 +12,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addNewOrder = exports.getAllOrders = void 0;
 const ordersSchema_1 = require("./ordersSchema");
 const userOperstions_1 = require("../user/userOperstions");
-const getAllOrders = (req) => __awaiter(void 0, void 0, void 0, function* () {
+const commons_1 = require("../../helpers/commons");
+const getAllOrders = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { email, phone } = req;
+        const { email, phone } = req.query;
         const user = email ? { email } : { phone };
         const owner = yield (0, userOperstions_1.getUser)(user);
         if (!owner) {
-            throw new Error();
+            throw (0, commons_1.catchError)(404);
         }
-        const list = yield ordersSchema_1.Orders.find({ owner }, "-createdAt -updatedAt");
-        return list;
+        const list = (yield ordersSchema_1.Orders.find({ owner }, "-createdAt -updatedAt"));
+        res.json(list);
     }
     catch (error) {
-        throw new Error(error.message);
+        next(error);
     }
 });
 exports.getAllOrders = getAllOrders;
-const addNewOrder = (req) => __awaiter(void 0, void 0, void 0, function* () {
+const addNewOrder = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { email, name, phone, address, order, totalPrice, dateOrder } = req;
+        const { email, name, phone, address, order, totalPrice, dateOrder } = req.body;
         const user = yield (0, userOperstions_1.addUser)({
             email,
             name,
@@ -39,18 +40,21 @@ const addNewOrder = (req) => __awaiter(void 0, void 0, void 0, function* () {
         });
         const idUser = user ? user._id : undefined;
         if (!idUser) {
-            throw new Error();
+            throw (0, commons_1.catchError)(401);
         }
-        const list = yield ordersSchema_1.Orders.create({
+        const list = (yield ordersSchema_1.Orders.create({
             owner: idUser,
             order,
             totalPrice,
             dateOrder,
-        });
-        return list;
+        }));
+        if (!list) {
+            throw (0, commons_1.catchError)(404);
+        }
+        res.status(201).json(list);
     }
     catch (error) {
-        throw new Error(error.message);
+        next(error);
     }
 });
 exports.addNewOrder = addNewOrder;

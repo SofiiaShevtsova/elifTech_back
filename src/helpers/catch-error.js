@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.catchError = void 0;
+exports.catchError = exports.MyError = void 0;
 const constants_1 = require("../commons/constants");
 class MyError extends Error {
     constructor({ message, status }) {
@@ -9,10 +9,10 @@ class MyError extends Error {
         this.status = status;
     }
 }
+exports.MyError = MyError;
 const catchError = (status, message) => {
     const errorMessage = message ? message : constants_1.myMessage[status];
-    const error = new MyError({ message: errorMessage, status });
-    return error;
+    return new MyError({ message: errorMessage, status });
 };
 exports.catchError = catchError;
 //# sourceMappingURL=catch-error.js.map

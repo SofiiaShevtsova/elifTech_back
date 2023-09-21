@@ -3,10 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const constants_1 = require("./commons/constants");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
+const constants_1 = require("./commons/constants");
 const productsRouter_1 = __importDefault(require("./routes/products/productsRouter"));
 const shopsRouter_1 = __importDefault(require("./routes/shops/shopsRouter"));
 const ordersRouter_1 = __importDefault(require("./routes/orders/ordersRouter"));

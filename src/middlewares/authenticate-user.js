@@ -16,17 +16,22 @@ exports.authenticate = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const authSchema_1 = require("../models/authUser/authSchema");
+const commons_1 = require("../helpers/commons");
 dotenv_1.default.config();
 const { ACCESS_SECRET_KEY } = process.env;
 const authenticate = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { authorization = "" } = req.headers;
     const [bearer, token] = authorization.split(" ");
     if (bearer !== "Bearer") {
+        next((0, commons_1.catchError)(401, "Not authorized"));
     }
     try {
         if (ACCESS_SECRET_KEY) {
             const payload = jsonwebtoken_1.default.verify(token, ACCESS_SECRET_KEY);
             const user = yield authSchema_1.UserTravel.findById(payload.id);
+            if (!user || !user.token || user.token !== token) {
+                next((0, commons_1.catchError)(401, "Not authorized"));
+            }
             if (user) {
                 req.user = user;
             }
@@ -34,6 +39,7 @@ const authenticate = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         }
     }
     catch (error) {
+        next((0, commons_1.catchError)(401, "Not authorized"));
     }
 });
 exports.authenticate = authenticate;

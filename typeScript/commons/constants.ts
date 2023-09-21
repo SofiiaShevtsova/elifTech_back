@@ -24,6 +24,7 @@ export const constants: ITravelApp = {
       register: "/sign-up",
       login: "/sign-in",
       current: "/authenticated-user",
+      logout: '/log-out',
     },
     TRIPS: "/trips",
     BOOKINGS: "/bookings",
