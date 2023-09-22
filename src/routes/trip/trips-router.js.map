@@ -1,1 +1,1 @@
-{"version":3,"file":"trips-router.js","sourceRoot":"","sources":["../../../typeScript/routes/trip/trips-router.ts"],"names":[],"mappings":""}
+{"version":3,"file":"trips-router.js","sourceRoot":"","sources":["../../../typeScript/routes/trip/trips-router.ts"],"names":[],"mappings":";;;;;AAAA,sDAA8B;AAC9B,mDAAoD;AACpD,uEAAyE;AAEzE,MAAM,MAAM,GAAG,iBAAO,CAAC,MAAM,EAAE,CAAC;AAEhC,MAAM,CAAC,GAAG,CAAC,GAAG,EAAE,IAAA,qBAAW,EAAC,0BAAQ,CAAC,CAAC,CAAC;AAEvC,MAAM,CAAC,GAAG,CAAC,WAAW,EAAE,IAAA,qBAAW,EAAC,4BAAU,CAAC,CAAC,CAAC;AAEjD,kBAAe,MAAM,CAAC"}
