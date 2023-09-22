@@ -10,7 +10,7 @@ const { Schema, model } = mongoose_1.default;
 const userSchema = new Schema({
     fullName: {
         type: String,
-        required: [true, "Set name for contact"],
+        required: [true, "Set name"],
     },
     password: {
         type: String,

@@ -25,7 +25,7 @@ const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         }
         const salt = yield bcryptjs_1.default.genSalt(10);
         const hashPassword = yield bcryptjs_1.default.hash(password, salt);
-        const user = yield auth_schema_1.UserTravel.create(Object.assign(Object.assign({}, req), { password: hashPassword }));
+        const user = yield auth_schema_1.UserTravel.create(Object.assign(Object.assign({}, req.body), { password: hashPassword }));
         const updatedUser = (0, commons_1.createToken)(user);
         yield auth_schema_1.UserTravel.findByIdAndUpdate(user._id, { token: updatedUser.token });
         res.status(201).json(updatedUser);

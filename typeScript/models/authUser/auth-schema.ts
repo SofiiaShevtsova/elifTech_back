@@ -8,7 +8,7 @@ const { Schema, model } = mongoose;
 const userSchema = new Schema<IUserTravelApp>({
   fullName: {
     type: String,
-    required: [true, "Set name for contact"],
+    required: [true, "Set name"],
   },
   password: {
     type: String,

@@ -17,7 +17,7 @@ export const registerUser = async (
     }
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
-    const user = await UserTravel.create({ ...req, password: hashPassword });
+    const user = await UserTravel.create({ ...req.body, password: hashPassword });
 
     const updatedUser = createToken(user);
     await UserTravel.findByIdAndUpdate(user._id, { token: updatedUser.token });
