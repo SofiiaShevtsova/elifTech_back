@@ -3,7 +3,7 @@ import { ctrlWrapper } from "../../helpers/commons";
 import {
   getAllOrders,
   addNewOrder,
-} from "../../models/orders/ordersOperstions";
+} from "../../models/orders/orders-operstions";
 import { validateBody } from "../../middlewares/commons";
 import { addOrderValidation } from "../../validation-schemas/commons";
 

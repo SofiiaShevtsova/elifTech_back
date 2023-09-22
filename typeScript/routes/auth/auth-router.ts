@@ -1,5 +1,5 @@
 import express from "express";
-import { constants } from "../../commons/constants";
+import { travelApp } from "../../commons/constants";
 import { authenticate, validateBody } from "../../middlewares/commons";
 import {
   registerUserSchema,
@@ -11,30 +11,30 @@ import {
   loginUser,
   logoutUser,
   registerUser,
-} from "../../models/authUser/authOperations";
+} from "../../models/authUser/auth-operations";
 
 const router = express.Router();
 
 router.post(
-  constants.ROUTERS.AUTH.register,
+  travelApp.ROUTERS.AUTH.register,
   validateBody(registerUserSchema),
   ctrlWrapper(registerUser)
 );
 
 router.post(
-  constants.ROUTERS.AUTH.login,
+  travelApp.ROUTERS.AUTH.login,
   validateBody(loginUserSchema),
   ctrlWrapper(loginUser)
 );
 
 router.get(
-  constants.ROUTERS.AUTH.current,
+  travelApp.ROUTERS.AUTH.current,
   authenticate,
   ctrlWrapper(getCurrentUser)
 );
 
 router.post(
-  constants.ROUTERS.AUTH.logout,
+  travelApp.ROUTERS.AUTH.logout,
   authenticate,
   ctrlWrapper(logoutUser)
 );

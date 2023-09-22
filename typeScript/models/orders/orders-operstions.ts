@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { Orders } from "./ordersSchema";
-import { getUser, addUser } from "../user/userOperstions";
+import { Orders } from "./orders-schema";
+import { getUser, addUser } from "../user/user-operstions";
 import { IOrders, TOrdersAdd } from "../../types/commons";
 import { catchError } from "../../helpers/commons";
 

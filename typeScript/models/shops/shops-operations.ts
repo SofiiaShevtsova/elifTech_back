@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { ShopsList } from "./shopsSchema";
+import { ShopsList } from "./shops-schema";
 import { IShops } from "../../types/commons";
 
 export const getAllShops = async (

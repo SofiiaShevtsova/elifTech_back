@@ -7,5 +7,5 @@ export interface IBookings {
   guests: number;
   date: string;
   totalPrice: number;
-  createdAt?: string;
+  createdAt?: Date;
 }

@@ -27,4 +27,4 @@ const userSchema = new Schema<IUserTravelApp>({
 
 userSchema.post("save", mongooseHandleError);
 
-export const UserTravel = model<IUserTravelApp>("User", userSchema);
+export const UserTravel = model<IUserTravelApp>("UserTravel", userSchema);

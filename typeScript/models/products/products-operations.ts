@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Products } from "./productsSchema";
+import { Products } from "./products-schema";
 import { IProducts } from "../../types/commons";
 
 export const getProducts = async (

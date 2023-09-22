@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constants = exports.myMessage = exports.delivery = void 0;
+exports.travelApp = exports.myMessage = exports.delivery = void 0;
 exports.delivery = {
     routes: {
         shops: "/api/shops",
@@ -16,7 +16,7 @@ exports.myMessage = {
     404: "Not found",
     409: "Conflict",
 };
-exports.constants = {
+exports.travelApp = {
     ROUTERS: {
         AUTH: {
             base: "api/auth",

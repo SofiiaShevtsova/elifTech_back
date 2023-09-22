@@ -1,4 +1,4 @@
-import { Users } from "./userSchema";
+import { Users } from "./user-schema";
 import express from "express";
 import { IUserDelivery } from "../../types/commons";
 

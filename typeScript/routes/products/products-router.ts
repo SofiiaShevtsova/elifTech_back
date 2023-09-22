@@ -2,7 +2,7 @@ import express from "express";
 import {
   getProducts,
   addProduct,
-} from "../../models/products/productsOperations";
+} from "../../models/products/products-operations";
 import { ctrlWrapper } from "../../helpers/ctrl-wrapper";
 
 const router = express.Router();

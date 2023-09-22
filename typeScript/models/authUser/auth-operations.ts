@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { UserTravel } from "./authSchema";
+import { UserTravel } from "./auth-schema";
 import { IUserTravelApp, IUserAdd, TMessage } from "../../types/commons";
 import { catchError, createToken } from "../../helpers/commons";
 import bcrypt from "bcryptjs";

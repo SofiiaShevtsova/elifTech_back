@@ -17,7 +17,7 @@ export const myMessage: TMessage = {
   409: "Conflict",
 };
 
-export const constants: ITravelApp = {
+export const travelApp: ITravelApp = {
   ROUTERS: {
     AUTH: {
       base: "api/auth",

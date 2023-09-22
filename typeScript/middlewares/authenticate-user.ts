@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import { NextFunction, Request, Response } from "express";
-import { UserTravel } from '../models/authUser/authSchema';
+import { UserTravel } from '../models/authUser/auth-schema';
 import { JwtPayload, IUserTravelApp } from '../types/commons';
 import {catchError} from '../helpers/commons'
 
