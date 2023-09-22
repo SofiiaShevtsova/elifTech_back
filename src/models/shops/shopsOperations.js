@@ -11,19 +11,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addShop = exports.getAllShops = void 0;
 const shopsSchema_1 = require("./shopsSchema");
-const getAllShops = () => __awaiter(void 0, void 0, void 0, function* () {
+const getAllShops = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const list = yield shopsSchema_1.ShopsList.find();
-        return list;
+        res.json(list);
     }
     catch (error) {
-        return error;
+        next(error);
     }
 });
 exports.getAllShops = getAllShops;
-const addShop = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const newShop = yield shopsSchema_1.ShopsList.create(req.body);
-    return newShop;
+const addShop = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const newShop = yield shopsSchema_1.ShopsList.create(req.body);
+        res.json(newShop);
+    }
+    catch (error) {
+        next(error);
+    }
 });
 exports.addShop = addShop;
 //# sourceMappingURL=shopsOperations.js.map

@@ -11,15 +11,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addUser = exports.getUser = void 0;
 const userSchema_1 = require("./userSchema");
-const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getUser = (req) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userFind = yield userSchema_1.Users.findOne(Object.assign({}, req));
-        if (userFind) {
-            return userFind;
+        if (!userFind) {
+            throw new Error("Can not find user!");
         }
+        return userFind;
     }
     catch (error) {
-        return error;
+        throw new Error(error.message);
     }
 });
 exports.getUser = getUser;
@@ -30,17 +31,11 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (userFind) {
             return userFind;
         }
-        const { error } = userSchema_1.addUserValidation.validate(Object.assign({}, req));
-        if (error) {
-            res && res.status(400).json({ message: `${error}` });
-        }
-        else {
-            const newUser = yield userSchema_1.Users.create(Object.assign({}, req));
-            return newUser;
-        }
+        const newUser = yield userSchema_1.Users.create(Object.assign({}, req));
+        return newUser;
     }
     catch (error) {
-        return error;
+        throw new Error(error.message);
     }
 });
 exports.addUser = addUser;
