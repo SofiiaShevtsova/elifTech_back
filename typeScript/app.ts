@@ -8,6 +8,7 @@ import productsRouter from "./routes/products/products-router";
 import shopsRouter from "./routes/shops/shops-router";
 import ordersRouter from "./routes/orders/orders-router";
 import userRouter from './routes/auth/auth-router';
+import tripsRouter from './routes/trip/trips-router';
 import bookingsRouter from './routes/booking/booking-router'
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(delivery.routes.shops, shopsRouter);
 app.use(delivery.routes.products, productsRouter);
 app.use(delivery.routes.orders, ordersRouter);
 app.use(travelApp.ROUTERS.AUTH.base, userRouter);
+app.use(travelApp.ROUTERS.TRIPS, tripsRouter);
 app.use(travelApp.ROUTERS.BOOKINGS, bookingsRouter);
 
 app.use((req: express.Request, res: express.Response) => {
