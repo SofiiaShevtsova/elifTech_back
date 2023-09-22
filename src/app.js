@@ -11,6 +11,7 @@ const products_router_1 = __importDefault(require("./routes/products/products-ro
 const shops_router_1 = __importDefault(require("./routes/shops/shops-router"));
 const orders_router_1 = __importDefault(require("./routes/orders/orders-router"));
 const auth_router_1 = __importDefault(require("./routes/auth/auth-router"));
+const trips_router_1 = __importDefault(require("./routes/trip/trips-router"));
 const booking_router_1 = __importDefault(require("./routes/booking/booking-router"));
 const app = (0, express_1.default)();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -22,6 +23,7 @@ app.use(constants_1.delivery.routes.shops, shops_router_1.default);
 app.use(constants_1.delivery.routes.products, products_router_1.default);
 app.use(constants_1.delivery.routes.orders, orders_router_1.default);
 app.use(constants_1.travelApp.ROUTERS.AUTH.base, auth_router_1.default);
+app.use(constants_1.travelApp.ROUTERS.TRIPS, trips_router_1.default);
 app.use(constants_1.travelApp.ROUTERS.BOOKINGS, booking_router_1.default);
 app.use((req, res) => {
     res.status(404).json({ message: constants_1.myMessage.notFound });

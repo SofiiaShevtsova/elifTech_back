@@ -20,13 +20,13 @@ export const myMessage: TMessage = {
 export const travelApp: ITravelApp = {
   ROUTERS: {
     AUTH: {
-      base: "api/auth",
+      base: "/api/auth",
       register: "/sign-up",
       login: "/sign-in",
       current: "/authenticated-user",
       logout: '/log-out',
     },
-    TRIPS: "api/trips",
-    BOOKINGS: "api/bookings",
+    TRIPS: "/api/trips",
+    BOOKINGS: "/api/bookings",
   },
 };
