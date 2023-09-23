@@ -4,13 +4,13 @@ import {
     getAllBookings,
     addNewBooking
 } from "../../models/booking/booking-operations";
-import { validateBody } from "../../middlewares/commons";
+import { authenticate, validateBody } from "../../middlewares/commons";
 import { addBookingValidation } from "../../validation-schemas/commons";
 
 const router = express.Router();
 
-router.post("/", validateBody(addBookingValidation), ctrlWrapper(addNewBooking));
+router.post("/", authenticate, validateBody(addBookingValidation), ctrlWrapper(addNewBooking));
 
-router.get("/", ctrlWrapper(getAllBookings));
+router.get("/", authenticate, ctrlWrapper(getAllBookings));
 
 export default router;
