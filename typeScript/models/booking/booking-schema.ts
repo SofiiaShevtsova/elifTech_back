@@ -6,7 +6,7 @@ const { Schema, model } = mongoose;
 
 const bookingsSchema = new Schema<IBookings>({
   userId: { type: Schema.Types.ObjectId, ref: "UserTravel", required: true },
-  tripId: { type: Schema.Types.ObjectId, ref: "Trip", required: true },
+  tripId: { type: Schema.Types.ObjectId, ref: "Trips", required: true },
   guests: {
     type: Number,
     required: true,

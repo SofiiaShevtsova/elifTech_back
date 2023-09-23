@@ -9,7 +9,7 @@ const commons_1 = require("../../helpers/commons");
 const { Schema, model } = mongoose_1.default;
 const bookingsSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: "UserTravel", required: true },
-    tripId: { type: Schema.Types.ObjectId, ref: "Trip", required: true },
+    tripId: { type: Schema.Types.ObjectId, ref: "Trips", required: true },
     guests: {
         type: Number,
         required: true,
