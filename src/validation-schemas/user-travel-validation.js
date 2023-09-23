@@ -14,12 +14,12 @@ exports.registerUserSchema = joi_1.default.object({
     email: joi_1.default.string()
         .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
         .required(),
-    password: joi_1.default.string().min(7).max(20).required(),
+    password: joi_1.default.string().min(3).max(20).required(),
 });
 exports.loginUserSchema = joi_1.default.object({
     email: joi_1.default.string()
         .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
         .required(),
-    password: joi_1.default.string().min(7).max(20).required(),
+    password: joi_1.default.string().min(3).max(20).required(),
 });
 //# sourceMappingURL=user-travel-validation.js.map

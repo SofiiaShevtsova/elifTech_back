@@ -4,12 +4,12 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const { DB_HOST, PORT} = process.env;
+const { DB_HOST, PORT } = process.env;
 mongoose.set("strictQuery", true);
 mongoose
   .connect(DB_HOST)
   .then(() => {
-      app.listen(PORT);
+    app.listen(PORT);
   })
   .catch((er) => {
     process.exit(1);
