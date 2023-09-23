@@ -6,6 +6,6 @@ export interface IBookings {
   tripId: Types.ObjectId;
   guests: number;
   date: string;
-  totalPrice: number;
+  totalPrice?: number;
   createdAt?: Date;
 }

@@ -20,7 +20,7 @@ const { ACCESS_SECRET_KEY } = process.env;
 export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
     const { authorization = "" } = req.headers;
     const [bearer, token] = authorization.split(" ");
-    if (bearer !== "Bearer") {
+    if (bearer !== "Bearer" && token === '') {
         next(catchError(401, "Not authorized"));
     }
     try {

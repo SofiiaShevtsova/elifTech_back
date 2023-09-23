@@ -26,9 +26,11 @@ const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         const salt = yield bcryptjs_1.default.genSalt(10);
         const hashPassword = yield bcryptjs_1.default.hash(password, salt);
         const user = yield auth_schema_1.UserTravel.create(Object.assign(Object.assign({}, req.body), { password: hashPassword }));
-        const updatedUser = (0, commons_1.createToken)(user);
-        yield auth_schema_1.UserTravel.findByIdAndUpdate(user._id, { token: updatedUser.token });
-        res.status(201).json(updatedUser);
+        const { token, fullName, _id } = (0, commons_1.createToken)(user);
+        if (token && fullName) {
+            yield auth_schema_1.UserTravel.findByIdAndUpdate(_id, { token });
+            res.status(201).json({ user: { email, fullName, _id }, token });
+        }
     }
     catch (error) {
         throw (0, commons_1.catchError)(400, error.message);
@@ -46,9 +48,11 @@ const loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         if (!compareResult) {
             throw (0, commons_1.catchError)(401, "Email or password is wrong");
         }
-        const updatedUser = (0, commons_1.createToken)(user);
-        yield auth_schema_1.UserTravel.findByIdAndUpdate(user._id, { token: updatedUser.token });
-        res.status(201).json(updatedUser);
+        const { token, fullName, _id } = (0, commons_1.createToken)(user);
+        if (token && fullName) {
+            yield auth_schema_1.UserTravel.findByIdAndUpdate(_id, { token });
+            res.status(201).json({ user: { email, fullName, _id }, token });
+        }
     }
     catch (error) {
         throw (0, commons_1.catchError)(400, error.message);
@@ -56,8 +60,8 @@ const loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
 });
 exports.loginUser = loginUser;
 const getCurrentUser = (req, res, next) => {
-    const user = req.user;
-    res.status(200).json(user);
+    const { email, fullName, _id } = req.user;
+    fullName && res.status(200).json({ email, fullName, _id });
 };
 exports.getCurrentUser = getCurrentUser;
 const logoutUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -65,7 +69,7 @@ const logoutUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         const user = req.user;
         const token = "";
         yield auth_schema_1.UserTravel.findByIdAndUpdate(user._id, { token });
-        res.status(204).json({ message: "The user has logged out!" });
+        res.status(201).json({ message: "The user has logged out!" });
     }
     catch (error) {
         throw (0, commons_1.catchError)(400, error.message);
