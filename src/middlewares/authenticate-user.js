@@ -22,7 +22,7 @@ const { ACCESS_SECRET_KEY } = process.env;
 const authenticate = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { authorization = "" } = req.headers;
     const [bearer, token] = authorization.split(" ");
-    if (bearer !== "Bearer") {
+    if (bearer !== "Bearer" && token === '') {
         next((0, commons_1.catchError)(401, "Not authorized"));
     }
     try {
