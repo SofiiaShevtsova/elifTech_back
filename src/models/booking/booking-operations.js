@@ -30,9 +30,10 @@ const addNewBooking = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         if (user._id.toString() !== userId.toString()) {
             throw (0, commons_1.catchError)(403);
         }
-        const newBooking = (yield booking_schema_1.Bookings.create(req.body));
+        const { _id } = yield booking_schema_1.Bookings.create(req.body);
+        const newBooking = (yield booking_schema_1.Bookings.findById(_id).populate("tripId", "title price image"));
         if (!newBooking) {
-            throw (0, commons_1.catchError)(404);
+            throw (0, commons_1.catchError)(400);
         }
         res.status(201).json(newBooking);
     }

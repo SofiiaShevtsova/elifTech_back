@@ -32,12 +32,15 @@ export const addNewBooking = async (
     if (user._id.toString() !== userId.toString()) {
       throw catchError(403);
     }
-    const newBooking = (await Bookings.create(
-      req.body
+    const { _id } = await Bookings.create(req.body);
+    const newBooking = (await Bookings.findById(_id).populate(
+      "tripId",
+      "title price image"
     )) as unknown as IBookings;
     if (!newBooking) {
-      throw catchError(404);
+      throw catchError(400);
     }
+
     res.status(201).json(newBooking);
   } catch (error: any) {
     throw catchError(404, error.message);
