@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import logger from "morgan";
 import { myMessage, delivery, travelApp } from "./commons/constants";
-import { MyError } from "./helpers/commons";
+import { MyError, corsOptions } from "./helpers/commons";
 
 import productsRouter from "./routes/products/products-router";
 import shopsRouter from "./routes/shops/shops-router";
@@ -16,7 +16,7 @@ const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.static(delivery.public));
 
